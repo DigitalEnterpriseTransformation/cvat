@@ -12,6 +12,6 @@ fi
 
 # 部署nuclio dashboard
 echo "正在部署nuclio dashboard..."
-docker compose -f docker-compose.serverless.standalone.yml up -d
+docker compose -f components/serverless/docker-compose.serverless.standalone.yml up -d
 
 echo "Done!"
