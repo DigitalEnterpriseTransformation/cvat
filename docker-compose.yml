@@ -106,6 +106,7 @@ services:
       - cvat_data:/home/django/data
       - cvat_keys:/home/django/keys
       - cvat_logs:/home/django/logs
+      - ${PWD}/cvat/settings/base.py:/home/django/cvat/settings/base.py
     networks:
       cvat:
         aliases:
