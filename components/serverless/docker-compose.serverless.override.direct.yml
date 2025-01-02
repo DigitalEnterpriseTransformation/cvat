@@ -1,0 +1,11 @@
+services:
+  cvat_server:
+    environment:
+      CVAT_SERVERLESS: 1
+      CVAT_NUCLIO_HOST: ${CVAT_NUCLIO_HOST:-localhost}
+    extra_hosts:
+      - "host.docker.internal:${CVAT_NUCLIO_HOST:-host-gateway}"
+
+  cvat_worker_annotation:
+    extra_hosts:
+      - "host.docker.internal:${CVAT_NUCLIO_HOST:-host-gateway}"
