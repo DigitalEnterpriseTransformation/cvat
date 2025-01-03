@@ -37,7 +37,7 @@ spec:
         - kind: RUN
           value: pip install onnxruntime-gpu=='1.16.*' pillow unstructured_inference
         - kind: RUN
-          value: pip uninstall opencv-python
+          value: pip uninstall -y opencv-python
         - kind: RUN
           value: pip install opencv-python-headless
         - kind: WORKDIR

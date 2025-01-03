@@ -34,8 +34,6 @@ spec:
           value: root
         - kind: RUN
           value: apt update && apt install --no-install-recommends -y wget python3-pip
-        - kind: WORKDIR
-          value: /opt/nuclio
         - kind: RUN
           value: pip install onnxruntime-gpu=='1.16.*' pillow unstructured_inference
         - kind: RUN
