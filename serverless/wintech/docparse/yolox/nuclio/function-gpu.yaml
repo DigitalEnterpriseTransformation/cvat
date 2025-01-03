@@ -1,0 +1,67 @@
+metadata:
+  name: onnx-unstructured-yolox
+  namespace: cvat
+  annotations:
+    name: YoloX Layout
+    type: detector
+    spec: |
+      [
+        { "id": 0, "name": "Caption", "type": "rectangle" },
+        { "id": 1, "name": "Footnote", "type": "rectangle" },
+        { "id": 2, "name": "Formula", "type": "rectangle" },
+        { "id": 3, "name": "List-item", "type": "rectangle" },
+        { "id": 4, "name": "Page-footer", "type": "rectangle" },
+        { "id": 5, "name": "Page-header", "type": "rectangle" },
+        { "id": 6, "name": "Picture", "type": "rectangle" },
+        { "id": 7, "name": "Section-header", "type": "rectangle" },
+        { "id": 8, "name": "Table", "type": "rectangle" },
+        { "id": 9, "name": "Text", "type": "rectangle" },
+        { "id": 10, "name": "Title", "type": "rectangle" }
+      ]
+
+spec:
+  description: YoloX for document layout analysis
+  runtime: 'python:3.10'
+  handler: main:handler
+  eventTimeout: 30s
+  build:
+    image: cvat.onnx.wintech.layout.unstructured.yolox:latest-gpu
+    baseImage: nvidia/cuda:12.1.0-cudnn8-runtime-ubuntu22.04
+
+    directives:
+      preCopy:
+        - kind: USER
+          value: root
+        - kind: RUN
+          value: apt update && apt install --no-install-recommends -y wget python3-pip
+        - kind: WORKDIR
+          value: /opt/nuclio
+        - kind: RUN
+          value: pip install onnxruntime-gpu=='1.16.*' pillow unstructured_inference
+        - kind: RUN
+          value: pip uninstall -y opencv-python
+        - kind: RUN
+          value: pip install opencv-python-headless
+        - kind: WORKDIR
+          value: /opt/nuclio
+        - kind: RUN
+          value: ln -s /usr/bin/python3 /usr/bin/python
+
+  triggers:
+    myHttpTrigger:
+      maxWorkers: 1
+      kind: 'http'
+      workerAvailabilityTimeoutMilliseconds: 10000
+      attributes:
+        maxRequestBodySize: 33554432 # 32MB
+
+  resources:
+    limits:
+      nvidia.com/gpu: 1
+
+  platform:
+    attributes:
+      restartPolicy:
+        name: always
+        maximumRetryCount: 3
+      mountMode: volume
