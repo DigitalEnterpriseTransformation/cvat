@@ -1,8 +1,8 @@
 metadata:
-  name: onnx-unstructured-yolox
+  name: docparse-layout-unstructured_yolox
   namespace: cvat
   annotations:
-    name: YoloX Layout
+    name: Layout Unstructured YoloX
     type: detector
     spec: |
       [
@@ -18,15 +18,15 @@ metadata:
         { "id": 9, "name": "Text", "type": "rectangle" },
         { "id": 10, "name": "Title", "type": "rectangle" }
       ]
-
+      
 spec:
-  description: YoloX for document layout analysis
+  description: YoloX for document layout analysis, provided by Unstructured
   runtime: 'python:3.10'
   handler: main:handler
   eventTimeout: 30s
   build:
-    image: cvat.onnx.wintech.layout.unstructured.yolox:latest-gpu
-    baseImage: nvidia/cuda:12.1.0-cudnn8-runtime-ubuntu22.04
+    image: cvat.wintech.docparse.layout.unstructured_yolox
+    baseImage: ubuntu:22.04
 
     directives:
       preCopy:
@@ -34,12 +34,10 @@ spec:
           value: root
         - kind: RUN
           value: apt update && apt install --no-install-recommends -y wget python3-pip
-        - kind: WORKDIR
-          value: /opt/nuclio
         - kind: RUN
           value: pip install onnxruntime-gpu=='1.16.*' pillow unstructured_inference
         - kind: RUN
-          value: pip uninstall -y opencv-python
+          value: pip uninstall opencv-python
         - kind: RUN
           value: pip install opencv-python-headless
         - kind: WORKDIR
@@ -49,15 +47,11 @@ spec:
 
   triggers:
     myHttpTrigger:
-      maxWorkers: 1
+      maxWorkers: 2
       kind: 'http'
       workerAvailabilityTimeoutMilliseconds: 10000
       attributes:
         maxRequestBodySize: 33554432 # 32MB
-
-  resources:
-    limits:
-      nvidia.com/gpu: 1
 
   platform:
     attributes:
