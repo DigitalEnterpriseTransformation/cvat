@@ -6,20 +6,16 @@ metadata:
     type: detector
     spec: |
       [
-        { "id": 0, "name": "Title", "type": "rectangle" },
-        { "id": 1, "name": "Text", "type": "rectangle" },
-        { "id": 2, "name": "Abandon", "type": "rectangle" },
-        { "id": 3, "name": "ImageBody", "type": "rectangle" },
-        { "id": 4, "name": "ImageCaption", "type": "rectangle" },
-        { "id": 5, "name": "TableBody", "type": "rectangle" },
-        { "id": 6, "name": "TableCaption", "type": "rectangle" },
-        { "id": 7, "name": "TableFootnote", "type": "rectangle" },
-        { "id": 8, "name": "InterlineEquation_Layout", "type": "rectangle" },
-        { "id": 9, "name": "FormulaCaption", "type": "rectangle" },
-        { "id": 13, "name": "InlineEquation", "type": "rectangle" },
-        { "id": 14, "name": "InterlineEquation_YOLO", "type": "rectangle" },
-        { "id": 15, "name": "OcrText", "type": "rectangle" },
-        { "id": 101, "name": "ImageFootnote", "type": "rectangle" }
+        { "id": 0, "name": "Title_MNU_LOLMv3", "type": "rectangle" },
+        { "id": 1, "name": "Text_MNU_LOLMv3", "type": "rectangle" },
+        { "id": 2, "name": "Abandon_MNU_LOLMv3", "type": "rectangle" },
+        { "id": 3, "name": "Figure_MNU_LOLMv3", "type": "rectangle" },
+        { "id": 4, "name": "FigureCaption_MNU_LOLMv3", "type": "rectangle" },
+        { "id": 5, "name": "Table_MNU_LOLMv3", "type": "rectangle" },
+        { "id": 6, "name": "TableCaption_MNU_LOLMv3", "type": "rectangle" },
+        { "id": 7, "name": "TableFootnote_MNU_LOLMv3", "type": "rectangle" },
+        { "id": 8, "name": "BlockFormula_MNU_LOLMv3", "type": "rectangle" },
+        { "id": 9, "name": "FormulaCaption_MNU_LOLMv3", "type": "rectangle" }
       ]
 
 spec:

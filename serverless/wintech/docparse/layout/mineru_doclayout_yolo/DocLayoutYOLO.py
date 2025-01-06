@@ -2,23 +2,6 @@ from doclayout_yolo import YOLOv10
 from PIL import Image
 
 
-LABEL_MAP = {
-    0: 'Title',
-    1: 'Text',
-    2: 'Abandon',
-    3: 'ImageBody',
-    4: 'ImageCaption',
-    5: 'TableBody',
-    6: 'TableCaption',
-    7: 'TableFootnote',
-    8: 'InterlineEquation_Layout',
-    13: 'InlineEquation',
-    14: 'InterlineEquation_YOLO',
-    15: 'OcrText',
-    101: 'ImageFootnote',
-}
-
-
 class DocLayoutYOLOModel(object):
     def __init__(self, weight, device):
         self.model = YOLOv10(weight)
@@ -36,7 +19,7 @@ class DocLayoutYOLOModel(object):
                                    doclayout_yolo_res.boxes.cls.cpu()):
             xmin, ymin, xmax, ymax = [int(p.item()) for p in xyxy]
             new_item = {
-                'label': LABEL_MAP[int(cla.item())],
+                'category_id': int(cla.item()),
                 'poly': [xmin, ymin, xmax, ymin, xmax, ymax, xmin, ymax],
                 'score': round(float(conf.item()), 3),
             }

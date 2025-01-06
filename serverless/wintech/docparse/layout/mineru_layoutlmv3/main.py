@@ -11,20 +11,16 @@ from model_init import Layoutlmv3_Predictor
 
 
 LABEL_MAP = {
-    0: 'Title',
-    1: 'Text',
-    2: 'Abandon',
-    3: 'ImageBody',
-    4: 'ImageCaption',
-    5: 'TableBody',
-    6: 'TableCaption',
-    7: 'TableFootnote',
-    8: 'InterlineEquation_Layout',
-    9: 'FormulaCaption',
-    13: 'InlineEquation',
-    14: 'InterlineEquation_YOLO',
-    15: 'OcrText',
-    101: 'ImageFootnote',
+    0: 'Title_MNU_LOLMv3',
+    1: 'Text_MNU_LOLMv3',
+    2: 'Abandon_MNU_LOLMv3',
+    3: 'Figure_MNU_LOLMv3',
+    4: 'FigureCaption_MNU_LOLMv3',
+    5: 'Table_MNU_LOLMv3',
+    6: 'TableCaption_MNU_LOLMv3',
+    7: 'TableFootnote_MNU_LOLMv3',
+    8: 'BlockFormula_MNU_LOLMv3',
+    9: 'FormulaCaption_MNU_LOLMv3',
 }
 
 
@@ -47,7 +43,7 @@ def init_context(context):
 
 
 def handler(context, event):
-    context.logger.info("Run LayoutLMv3")
+    context.logger.info("Run layout analysis MinerU LayoutLMv3 model")
     data = event.body
     buf = io.BytesIO(base64.b64decode(data["image"]))
     image = np.array(Image.open(buf))
@@ -57,7 +53,7 @@ def handler(context, event):
     results = []
     for i, el in enumerate(elements):
         bbox = [el['poly'][0], el['poly'][1], el['poly'][4], el['poly'][5]]
-        context.logger.info(f"{i}, {el['category_id']}, {bbox}")
+        context.logger.info(f"{i}, {LABEL_MAP[el['category_id']]}, {bbox}")
         results.append({
             "confidence": str(el['score']),
             "label": LABEL_MAP[el['category_id']],

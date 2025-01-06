@@ -6,17 +6,17 @@ metadata:
     type: detector
     spec: |
       [
-        { "id": 0, "name": "Caption", "type": "rectangle" },
-        { "id": 1, "name": "Footnote", "type": "rectangle" },
-        { "id": 2, "name": "Formula", "type": "rectangle" },
-        { "id": 3, "name": "List-item", "type": "rectangle" },
-        { "id": 4, "name": "Page-footer", "type": "rectangle" },
-        { "id": 5, "name": "Page-header", "type": "rectangle" },
-        { "id": 6, "name": "Picture", "type": "rectangle" },
-        { "id": 7, "name": "Section-header", "type": "rectangle" },
-        { "id": 8, "name": "Table", "type": "rectangle" },
-        { "id": 9, "name": "Text", "type": "rectangle" },
-        { "id": 10, "name": "Title", "type": "rectangle" }
+        { "id": 0, "name": "Caption_UNSTCTD_YOLOX", "type": "rectangle" },
+        { "id": 1, "name": "Footnote_UNSTCTD_YOLOX", "type": "rectangle" },
+        { "id": 2, "name": "Formula_UNSTCTD_YOLOX", "type": "rectangle" },
+        { "id": 3, "name": "ListItem_UNSTCTD_YOLOX", "type": "rectangle" },
+        { "id": 4, "name": "PageFooter_UNSTCTD_YOLOX", "type": "rectangle" },
+        { "id": 5, "name": "PageHeader_UNSTCTD_YOLOX", "type": "rectangle" },
+        { "id": 6, "name": "Figure_UNSTCTD_YOLOX", "type": "rectangle" },
+        { "id": 7, "name": "SectionHeader_UNSTCTD_YOLOX", "type": "rectangle" },
+        { "id": 8, "name": "Table_UNSTCTD_YOLOX", "type": "rectangle" },
+        { "id": 9, "name": "Text_UNSTCTD_YOLOX", "type": "rectangle" },
+        { "id": 10, "name": "Title_UNSTCTD_YOLOX", "type": "rectangle" }
       ]
       
 spec:

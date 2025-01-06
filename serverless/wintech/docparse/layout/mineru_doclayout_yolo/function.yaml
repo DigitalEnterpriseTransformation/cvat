@@ -1,33 +1,30 @@
 metadata:
-  name: docparse-layout-doclayout_yolo
+  name: docparse-layout-mineru_doclayout_yolo
   namespace: cvat
   annotations:
-    name: Layout DocLayout Yolov10
+    name: Layout MinerU DocLayout Yolov10
     type: detector
     spec: |
       [
-        { "id": 0, "name": "Title", "type": "rectangle" },
-        { "id": 1, "name": "Text", "type": "rectangle" },
-        { "id": 2, "name": "Abandon", "type": "rectangle" },
-        { "id": 3, "name": "ImageBody", "type": "rectangle" },
-        { "id": 4, "name": "ImageCaption", "type": "rectangle" },
-        { "id": 5, "name": "TableBody", "type": "rectangle" },
-        { "id": 6, "name": "TableCaption", "type": "rectangle" },
-        { "id": 7, "name": "TableFootnote", "type": "rectangle" },
-        { "id": 8, "name": "InterlineEquation_Layout", "type": "rectangle" },
-        { "id": 13, "name": "InlineEquation", "type": "rectangle" },
-        { "id": 14, "name": "InterlineEquation_YOLO", "type": "rectangle" },
-        { "id": 15, "name": "OcrText", "type": "rectangle" },
-        { "id": 101, "name": "ImageFootnote", "type": "rectangle" }
+        { "id": 0, "name": "Title_MNU_DLOYOLOv10", "type": "rectangle" },
+        { "id": 1, "name": "Text_MNU_DLOYOLOv10", "type": "rectangle" },
+        { "id": 2, "name": "Abandon_MNU_DLOYOLOv10", "type": "rectangle" },
+        { "id": 3, "name": "Figure_MNU_DLOYOLOv10", "type": "rectangle" },
+        { "id": 4, "name": "FigureCaption_MNU_DLOYOLOv10", "type": "rectangle" },
+        { "id": 5, "name": "Table_MNU_DLOYOLOv10", "type": "rectangle" },
+        { "id": 6, "name": "TableCaption_MNU_DLOYOLOv10", "type": "rectangle" },
+        { "id": 7, "name": "TableFootnote_MNU_DLOYOLOv10", "type": "rectangle" },
+        { "id": 13, "name": "InlineFormula_MNU_DLOYOLOv10", "type": "rectangle" },
+        { "id": 14, "name": "BlockFormula_MNU_DLOYOLOv10", "type": "rectangle" }
       ]
       
 spec:
-  description: Yolov10 for document layout analysis, provided by DocLayout
+  description: Yolov10 for document layout analysis, provided by MinerU DocLayout
   runtime: 'python:3.10'
   handler: main:handler
   eventTimeout: 30s
   build:
-    image: cvat.wintech.docparse.layout.doclayout_yolo
+    image: cvat.wintech.docparse.layout.mineru_doclayout_yolo
     baseImage: ubuntu:22.04
 
     directives:
