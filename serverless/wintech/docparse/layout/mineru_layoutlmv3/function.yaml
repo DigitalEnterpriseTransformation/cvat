@@ -1,0 +1,64 @@
+metadata:
+  name: docparse-layout-mineru_layoutlmv3
+  namespace: cvat
+  annotations:
+    name: Layout MinerU LayoutLMv3
+    type: detector
+    spec: |
+      [
+        { "id": 0, "name": "Title", "type": "rectangle" },
+        { "id": 1, "name": "Text", "type": "rectangle" },
+        { "id": 2, "name": "Abandon", "type": "rectangle" },
+        { "id": 3, "name": "ImageBody", "type": "rectangle" },
+        { "id": 4, "name": "ImageCaption", "type": "rectangle" },
+        { "id": 5, "name": "TableBody", "type": "rectangle" },
+        { "id": 6, "name": "TableCaption", "type": "rectangle" },
+        { "id": 7, "name": "TableFootnote", "type": "rectangle" },
+        { "id": 8, "name": "InterlineEquation_Layout", "type": "rectangle" },
+        { "id": 9, "name": "FormulaCaption", "type": "rectangle" },
+        { "id": 13, "name": "InlineEquation", "type": "rectangle" },
+        { "id": 14, "name": "InterlineEquation_YOLO", "type": "rectangle" },
+        { "id": 15, "name": "OcrText", "type": "rectangle" },
+        { "id": 101, "name": "ImageFootnote", "type": "rectangle" }
+      ]
+      
+spec:
+  description: LayoutLMv3 for document layout analysis, provided by MinerU
+  runtime: 'python:3.10'
+  handler: main:handler
+  eventTimeout: 30s
+  build:
+    image: cvat.wintech.docparse.layout.mineru_layoutlmv3
+    baseImage: ubuntu:22.04
+
+    directives:
+      preCopy:
+        - kind: USER
+          value: root
+        - kind: RUN
+          value: apt update && apt install --no-install-recommends -y wget python3-pip
+        - kind: RUN
+          value: pip install torch==2.2.0 torchvision==0.17.0 pillow modelscope detectron2 transformers matplotlib timm --extra-index-url https://wheels.myhloli.com
+        - kind: RUN
+          value: pip uninstall -y opencv-python
+        - kind: RUN
+          value: pip install opencv-python-headless opencv-contrib-python-headless
+        - kind: WORKDIR
+          value: /opt/nuclio
+        - kind: RUN
+          value: ln -s /usr/bin/python3 /usr/bin/python
+
+  triggers:
+    myHttpTrigger:
+      maxWorkers: 2
+      kind: 'http'
+      workerAvailabilityTimeoutMilliseconds: 10000
+      attributes:
+        maxRequestBodySize: 33554432 # 32MB
+
+  platform:
+    attributes:
+      restartPolicy:
+        name: always
+        maximumRetryCount: 3
+      mountMode: volume
